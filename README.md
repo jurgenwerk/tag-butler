@@ -1,4 +1,4 @@
 job-inspector
 =============
 
-website; crawls your links regularly, finds jobs that interest you
+rails site; crawls your links regularly, finds jobs that interest you
