@@ -5,7 +5,7 @@
 #   gem 'sqlite3'
 development:
   adapter: postgresql
-  database: jobInspector
+  database: job_inspector
   pool: 5
   timeout: 5000
   username: postgres
