@@ -1,4 +1,11 @@
 JobInspector::Application.routes.draw do
+ 
+  root to: 'static_pages#home'
+  match '/static_pages/home', :to =>'static_pages#home'
+  match '/signup',  to: 'users#new'
+  resources :hits
+
+
   resources :feeds
 
 
