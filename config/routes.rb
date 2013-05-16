@@ -3,13 +3,12 @@ JobInspector::Application.routes.draw do
   root to: 'static_pages#home'
   match '/static_pages/home', :to =>'static_pages#home'
   match '/signup',  to: 'users#new'
+  
   resources :hits
-
-
   resources :feeds
-
-
   resources :users
+
+  resources :sessions, only: [:new, :create, :destroy]
 
 
   # The priority is based upon order of creation:
