@@ -1,19 +1,42 @@
 <h1>job inspector</h1>
-<p>blabla</p>
+<br><br>
 
-<%= "prijavljen je:" + current_user.username %> <br><br>
+<% if current_user != nil %>
+	Logged in: <%= link_to current_user.username, current_user %>
+<% end %>
 
- <%= form_for(:session, url: sessions_path) do |f| %>
+<% if current_user %>
+  |
+	<%= link_to "Logout", signout_path, :method => 'delete' %>
+  <p> Your feeds: </p>
 
-      <%= f.label :email %>
-      <%= f.text_field :email %>
+  <% if current_user.feeds.any? %>
+  	<% current_user.feeds.each do |feed| %>
+  		<%= link_to feed.url.split(".").first, feed %> |
+  		 <%= link_to 'delete', feed, method: :delete %> 
+  		<br>
+  	<% end %>
+  <% end %>
+  <br> Make a new feed:<br><br>
+<% @feed = current_user.feeds.new() %>
+<%= render :partial => '/feeds/form' %>
+<% end %>
 
-      <%= f.label :password %>
-      <%= f.password_field :password %>
 
-      <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
-    <% end %>
 
-    <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+<br><br><br>
 
-<%= link_to "User", signup_path %>
+<% if !signed_in? %>
+<%= form_for(:session, url: sessions_path) do |f| %>
+
+  <%= f.label :email %>
+  <%= f.text_field :email %>
+
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+
+  <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
+ <% end %>
+
+ <p>New user? <%= link_to "Sign up bro!", signup_path %></p>
+<% end %>

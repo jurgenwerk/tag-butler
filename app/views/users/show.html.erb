@@ -11,6 +11,14 @@
   <%= @user.email %>
 </p>
 
+<h3> Feeds </h3>
+<% if @user == current_user && @user.feeds.any? %>
+	<% current_user.feeds.each do |feed| %>
+ 		<%= link_to feed.url, feed %>
+ 		<br>
+	<% end %>
+<% end %>
+<br>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<% @feed = current_user.feeds.new() %>
+<%= render :partial => '/feeds/form' %>

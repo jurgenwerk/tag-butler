@@ -3,7 +3,7 @@ class FeedsController < ApplicationController
   # GET /feeds.json
   def index
     @feeds = Feed.all
-
+    @user_from_params = User.find_by_username(params[:user_id])
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @feeds }
@@ -13,7 +13,9 @@ class FeedsController < ApplicationController
   # GET /feeds/1
   # GET /feeds/1.json
   def show
-    @feed = Feed.find(params[:id])
+
+
+    @feed = current_user.feeds.find_by_name(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -40,11 +42,11 @@ class FeedsController < ApplicationController
   # POST /feeds
   # POST /feeds.json
   def create
-    @feed = Feed.new(params[:feed])
+    @feed = current_user.feeds.create(params[:feed])#Feed.new(params[:feed])
 
     respond_to do |format|
       if @feed.save
-        format.html { redirect_to @feed, notice: 'Feed was successfully created.' }
+        format.html { redirect_to root_path, notice: 'Feed was successfully created.' }
         format.json { render json: @feed, status: :created, location: @feed }
       else
         format.html { render action: "new" }
@@ -60,7 +62,7 @@ class FeedsController < ApplicationController
 
     respond_to do |format|
       if @feed.update_attributes(params[:feed])
-        format.html { redirect_to @feed, notice: 'Feed was successfully updated.' }
+        format.html { redirect_to root_path, notice: 'Feed was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -72,11 +74,11 @@ class FeedsController < ApplicationController
   # DELETE /feeds/1
   # DELETE /feeds/1.json
   def destroy
-    @feed = Feed.find(params[:id])
+    @feed = Feed.find_by_name(params[:id])
     @feed.destroy
 
     respond_to do |format|
-      format.html { redirect_to feeds_url }
+      format.html { redirect_to root_path }
       format.json { head :no_content }
     end
   end

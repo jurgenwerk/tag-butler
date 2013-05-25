@@ -1,12 +1,20 @@
 JobInspector::Application.routes.draw do
  
+
   root to: 'static_pages#home'
   match '/static_pages/home', :to =>'static_pages#home'
+
   match '/signup',  to: 'users#new'
-  
+  match '/signin', to: 'sessions#new'
+  match '/signout', to: 'sessions#destroy', via: :delete
+
   resources :hits
-  resources :feeds
-  resources :users
+
+  resources :users 
+  resources :feeds 
+
+  resources :tags 
+
 
   resources :sessions, only: [:new, :create, :destroy]
 

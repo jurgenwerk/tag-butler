@@ -1,10 +1,29 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Url:</b>
+  <b>Feed:</b>
   <%= @feed.url %>
 </p>
 
+<% if current_user != nil && current_user.feeds.find_by_id(@feed.id) %>
+	<% if @feed && @feed.tags.any? %>
+		<% @feed.tags.each do |tag| %>
+	  		<%= tag.value %> | <%= link_to 'delete', tag_path(tag, :feed_id => @feed.id), method: :delete %>
+	  		<br>
+		<% end %>
+	<% end %>
+<% end %>
 
-<%= link_to 'Edit', edit_feed_path(@feed) %> |
-<%= link_to 'Back', feeds_path %>
+<% @tag = @feed.tags.new() %>
+<%= render :partial => '/tags/form', :locals => { :feed => @feed} %>
+
+<br><br>
+
+<% if @feed.hits.any? %>
+Your hits:<br>
+	<% @feed.hits.each do |hit| %>
+		<%= link_to hit.url %>
+	<% end%>
+<% else %>
+	No hits yet :(
+<% end %>

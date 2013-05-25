@@ -1,23 +1,28 @@
 <h1>Listing feeds</h1>
 
-<table>
-  <tr>
-    <th>Url</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @feeds.each do |feed| %>
-  <tr>
-    <td><%= feed.url %></td>
-    <td><%= link_to 'Show', feed %></td>
-    <td><%= link_to 'Edit', edit_feed_path(feed) %></td>
-    <td><%= link_to 'Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+<% if @user_from_params != current_user %>
+  <h3> cant touch this </h3>
+<% else %>
+  <table>
+    <tr>
+      <th>Url</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    <% current_user.feeds.each do |feed| %>
+    <tr>
+      <td><%= feed.url %></td>
+      <td><%= link_to 'Show', feed %></td>
+      <td><%= link_to 'Edit', edit_feed_path(feed) %></td>
+      <td><%= link_to 'Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+  </table>
+  <%= link_to 'New Feed', new_feed_path %>
 <% end %>
-</table>
+
 
 <br />
 
-<%= link_to 'New Feed', new_feed_path %>
+
