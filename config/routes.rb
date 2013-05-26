@@ -1,6 +1,8 @@
 JobInspector::Application.routes.draw do
  
 
+  get "crawler/crawl_all"
+
   root to: 'static_pages#home'
   match '/static_pages/home', :to =>'static_pages#home'
 

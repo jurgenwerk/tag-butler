@@ -2,8 +2,8 @@ class Feed < ActiveRecord::Base
   attr_accessible :url, :name, :id
 
   belongs_to :user
-  has_many :hits
-  has_many :tags
+  has_many :hits, :dependent => :destroy
+  has_many :tags, :dependent => :destroy
 
   def to_param
 		name
