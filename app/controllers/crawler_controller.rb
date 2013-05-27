@@ -13,7 +13,6 @@ class CrawlerController < ApplicationController
 
   end
 
-
   private
 
   	def crawl_feed(feed)
@@ -21,8 +20,8 @@ class CrawlerController < ApplicationController
   		links = visit feed.url 
 
   		links.each do |link.downcase!|
-  			if link_is_new? link and link_contains_tag? feed
-  				# we got a hit!
+  			if link_is_new? feed, link and link_contains_tag? feed, link
+  				feed.hits.create url: link
   			end
   		end
 		end
@@ -32,7 +31,7 @@ class CrawlerController < ApplicationController
 			begin
 				doc = Nokogiri::HTML(open(url))
 	      doc.css('a').each do |link|
-	      	links << link unless link['href'].to_s.length < 1
+	      	links['href'] << link unless link['href'].to_s.length <= 1
       	end
     	rescue => ex
       	logger.warn "shieeeet!!: #{ex}" 
@@ -40,13 +39,14 @@ class CrawlerController < ApplicationController
     	return links
 		end
 
-		def link_is_new?(link)
+		def link_is_new?(feed, link)
+			feed.hits_find_by_url link 
 		end
 
-		def link_contains_tag?(link, feed)
-			
+		def link_contains_tag?(feed, link)
+			feed.tags.each do |tag|
+				return true if link.include? tag
+			end
+			false
 		end
-
-
-
 end
