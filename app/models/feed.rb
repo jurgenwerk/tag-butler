@@ -1,11 +1,12 @@
 class Feed < ActiveRecord::Base
-  attr_accessible :url, :name, :id
+  extend FriendlyId
+  friendly_id :name, :use => :slugged
 
-  belongs_to :user
-  has_many :hits, :dependent => :destroy
-  has_many :tags, :dependent => :destroy
+  attr_accessible :url, :name, :tag_group_id
+
+  belongs_to :tag_group
 
   def to_param
-		name
+		friendly_id
 	end
 end

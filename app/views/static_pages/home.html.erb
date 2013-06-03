@@ -1,42 +1,41 @@
 <h1>job inspector</h1>
-<br><br>
 
-<% if current_user != nil %>
-	Logged in: <%= link_to current_user.username, current_user %>
-<% end %>
-
-<% if current_user %>
-  |
-	<%= link_to "Logout", signout_path, :method => 'delete' %>
-  <p> Your feeds: </p>
-
-  <% if current_user.feeds.any? %>
-  	<% current_user.feeds.each do |feed| %>
-  		<%= link_to feed.url.split(".").first, feed %> |
-  		 <%= link_to 'delete', feed, method: :delete %> 
-  		<br>
-  	<% end %>
+<div id = "container">
+  <% if current_user != nil %>
+  	Logged in: <%= link_to current_user.username, current_user %>
   <% end %>
-  <br> Make a new feed:<br><br>
-<% @feed = current_user.feeds.new() %>
-<%= render :partial => '/feeds/form' %>
-<% end %>
 
+  <% if current_user %>
+    |
+  	<%= link_to "Logout", signout_path, :method => 'delete' %>
+    
+    <% if current_user.tag_groups.any? %>
+    <p> Your tag groups: </p>
+    	<% current_user.tag_groups.each do |tag_group| %>
+    		<%= link_to tag_group.name, tag_group %> |
+    		<%= link_to 'delete', tag_group, method: :delete %> 
+    		<br>
+    	<% end %>
+    <% end %>
+    <br><br> Make a new tag group:<br><br>
+  <% @tag_group = current_user.tag_groups.new() %>
+  <%= render :partial => '/tag_groups/form' %>
+  <% end %>
 
+  <br>
 
-<br><br><br>
+  <% if !signed_in? %>
+  <%= form_for(:session, url: sessions_path) do |f| %>
 
-<% if !signed_in? %>
-<%= form_for(:session, url: sessions_path) do |f| %>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
 
-  <%= f.label :email %>
-  <%= f.text_field :email %>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
 
-  <%= f.label :password %>
-  <%= f.password_field :password %>
+    <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
+   <% end %>
 
-  <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
- <% end %>
-
- <p>New user? <%= link_to "Sign up bro!", signup_path %></p>
-<% end %>
+   <p>New user? <%= link_to "Sign up bro!", signup_path %></p>
+  <% end %>
+</div>

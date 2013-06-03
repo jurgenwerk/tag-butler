@@ -40,14 +40,14 @@ class TagsController < ApplicationController
   # POST /tags
   # POST /tags.json
   def create
-    @feed = Feed.find(params[:tag][:feed_id])
-    @tag_value = params[:tag][:value]
-    @tag = @feed.tags.new(value: @tag_value)
-    
-    #@tag = current_user.feeds.create(params[:feed])
+    tag_group_id = params[:tag][:tag_group_id]
+    @tag_group = TagGroup.find_by_id tag_group_id
+
+    @tag = @tag_group.tags.create(params[:tag])
+
     respond_to do |format|
       if @tag.save
-        format.html { redirect_to @feed, notice: 'Tag was successfully created.' }
+        format.html { redirect_to @tag_group, notice: 'Tag was successfully created.' }
         format.json { render json: @tag, status: :created, location: @tag }
       else
         format.html { render action: "new" }
@@ -75,12 +75,12 @@ class TagsController < ApplicationController
   # DELETE /tags/1
   # DELETE /tags/1.json
   def destroy
-    @feed = Feed.find_by_id(params[:feed_id])
-    @tag = Tag.find_by_value(params[:id])
+    @tag = Tag.find_by_slug(params[:id])
+    @tag_group = TagGroup.find_by_slug(params[:tag_group])
     @tag.destroy
 
     respond_to do |format|
-      format.html { redirect_to @feed }
+      format.html { redirect_to @tag_group }
       format.json { head :no_content }
     end
   end

@@ -11,12 +11,11 @@
     </div>
   <% end %>
 
-<br>Add a tag:
-  <div class="field"><br />
+  <div class="field">
     <%= f.text_field :value %>
   </div>
   <div class="actions">
-    <%= f.hidden_field :feed_id, :value => @feed.id %>
+    <%= f.hidden_field :tag_group_id, :value => @tag_group.id %>
     <%= f.submit %>
   </div>
 <% end %>

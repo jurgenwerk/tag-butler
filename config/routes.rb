@@ -1,6 +1,9 @@
 JobInspector::Application.routes.draw do
  
 
+  resources :tag_groups
+
+
   get "crawler/crawl_all"
 
   root to: 'static_pages#home'

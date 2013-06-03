@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+   <h1><%= @tag_group.name  %></h2>
+</p><br>
+
+<% if @tag_group.feeds.any? %>
+	<h2>Feeds</h2>
+	<% @tag_group.feeds.each do |feed| %>
+		<%= link_to feed.name, feed %> | <%= link_to 'delete', feed_path(feed, :tag_group => @tag_group.slug), method: :delete %> <br>
+	<% end %>
+<% end %>
+
+<br> <h4>Add a feed for this group:</h4> 
+
+<% @feed = @tag_group.feeds.new() %>
+<%= render :partial => '/feeds/form', :locals => { :tag_group => @tag_group} %>
+
+<% if @tag_group.tags.any? %>
+	<h2>Tags</h2>
+	<% @tag_group.tags.each do |tag| %>
+		<%= link_to tag.value, tag %> | <%= link_to 'delete', tag_path(tag, :tag_group => @tag_group.slug), method: :delete %> <br>
+	<% end %>
+<% end %>
+
+<br>
+<h4>Add a tag for this group:</h4> 
+<% @tag = @tag_group.tags.new() %>
+<%= render :partial => '/tags/form', :locals => { :tag_group => @tag_group} %>
+
+<% if @tag_group.hits.any? %>
+Your hits:<br>
+	<% @tag_group.hits.each do |hit| %>
+		<%= link_to hit.title, hit.url %> <br>
+	<% end%>
+<% else %>
+	No hits yet :(
+<% end %>

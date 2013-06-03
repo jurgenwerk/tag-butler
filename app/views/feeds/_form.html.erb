@@ -12,10 +12,11 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label 'Feed name' %><br />
     <%= f.text_field :name %><br />
     <%= f.label :url %><br />
     <%= f.text_field :url %>
+    <%= f.hidden_field :tag_group_id, :value => @tag_group.id %>
   </div>
   <div class="actions">
     <%= f.submit %>

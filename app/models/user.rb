@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :feeds, :dependent => :destroy
+  has_many :tag_groups, :dependent => :destroy
   attr_accessible :username, :email, :password, :password_confirmation
   has_secure_password
 

@@ -13,9 +13,7 @@ class FeedsController < ApplicationController
   # GET /feeds/1
   # GET /feeds/1.json
   def show
-
-
-    @feed = current_user.feeds.find_by_name(params[:id])
+    @feed = current_user.feeds.find_by_slug(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -42,11 +40,14 @@ class FeedsController < ApplicationController
   # POST /feeds
   # POST /feeds.json
   def create
-    @feed = current_user.feeds.create(params[:feed])#Feed.new(params[:feed])
+    tag_group_id = params[:feed][:tag_group_id]
+    @tag_group = TagGroup.find_by_id tag_group_id
+
+    @feed = @tag_group.feeds.create(params[:feed])
 
     respond_to do |format|
       if @feed.save
-        format.html { redirect_to root_path, notice: 'Feed was successfully created.' }
+        format.html { redirect_to @tag_group, notice: 'Feed was successfully created.' }
         format.json { render json: @feed, status: :created, location: @feed }
       else
         format.html { render action: "new" }
@@ -74,11 +75,12 @@ class FeedsController < ApplicationController
   # DELETE /feeds/1
   # DELETE /feeds/1.json
   def destroy
-    @feed = Feed.find_by_name(params[:id])
+    @feed = Feed.find_by_slug(params[:id])
+    @tag_group = TagGroup.find_by_slug(params[:tag_group])
     @feed.destroy
 
     respond_to do |format|
-      format.html { redirect_to root_path }
+      format.html { redirect_to @tag_group }
       format.json { head :no_content }
     end
   end

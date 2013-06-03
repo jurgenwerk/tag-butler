@@ -2,11 +2,12 @@
 
 <p>
   <b>Feed:</b>
-  <%= @feed.url %>
+  <%= link_to @feed.name, @feed.url %>
 </p>
 
 <% if current_user != nil && current_user.feeds.find_by_id(@feed.id) %>
 	<% if @feed && @feed.tags.any? %>
+	  <b>Searching for following tags:</b><br>
 		<% @feed.tags.each do |tag| %>
 	  		<%= tag.value %> | <%= link_to 'delete', tag_path(tag, :feed_id => @feed.id), method: :delete %>
 	  		<br>
@@ -22,7 +23,7 @@
 <% if @feed.hits.any? %>
 Your hits:<br>
 	<% @feed.hits.each do |hit| %>
-		<%= link_to hit.url %>
+		<%= link_to hit.title, hit.url %> <br>
 	<% end%>
 <% else %>
 	No hits yet :(

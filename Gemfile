@@ -10,8 +10,16 @@ gem 'pg'
 gem 'sqlite3'
 gem 'nokogiri'
 gem 'bcrypt-ruby', '3.0.1'
+gem "certified", "~> 0.1.1"
+gem 'addressable'
+gem "friendly_id", "~> 4.0.9"
+gem 'jquery-ui-rails'
 
+#gem 'bootstrap-sass', '2.1'
+#gem 'twitter-bootstrap-rails'
 
+#gem 'libv8', '3.11.8.0'
+#gem 'designmodo-flatuipro-rails'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
