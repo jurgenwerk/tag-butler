@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(:version => 20130601211429) do
     t.text     "url"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.integer  "user_id"
     t.string   "name"
     t.string   "slug"
     t.integer  "tag_group_id"
@@ -42,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20130601211429) do
     t.string   "value"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.integer  "feed_id"
     t.integer  "tag_group_id"
     t.string   "slug"
   end
