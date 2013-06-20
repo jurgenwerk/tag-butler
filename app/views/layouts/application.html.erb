@@ -1,15 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>JobInspector</title>
+  <title>Tag Butler</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
-  
-  
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container-fluid">      
+      <div class="nav-collapse">
+        <ul class="nav pull-right">
+          <li class="active"> 
+          	<%= link_to "Tag Butler", root_path %>
+          </li>
+ 
+          <% if signed_in? %>
+          	<li>
+          		<%= link_to "Your profile", current_user %>
+          	</li>
+          	<li>
+          		<%= link_to "Sign out", signout_path, :method => 'delete' %>
+          	</li>
+          <% else %>
+           <li class="dropdown" id="menu1">
+             <a class="dropdown-toggle" data-toggle="dropdown" href="#menu1">
+               <b>Sign in</b>
+             </a>
+             <div class="dropdown-menu">
+							  <%= form_for(:session, url: sessions_path, :html => { :style => 'margin-left: 10px; margin-right: 10px;' }) do |f| %>
+
+							    <%= f.text_field :email, :placeholder => "Email", :style => "margin-top: 15px;" %>
+
+							    <%= f.password_field :password, :placeholder => "Password" %>
+
+							    <%= f.submit "Do it!", class: "btn btn-small btn-block btn-primary" %>
+
+							    <label class="checkbox" for="checkbox1" style: "margin-top: 10px">
+			            <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox">
+			            Remember me
+			            <br>
+			          </label>
+			          	<span class="small_link"><a href="#">Forgotten password?</a></span>
+							   <% end %>
+							 <% end %>
+             </div>
+           </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class = "container" style ="padding-top: 100px">
+	<%= yield %>
+</div>
 <%= javascript_include_tag "application" %>
 </body>
 </html>

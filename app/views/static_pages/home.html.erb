@@ -1,14 +1,5 @@
-<h1>job inspector</h1>
-
-<div id = "container">
-  <% if current_user != nil %>
-  	Logged in: <%= link_to current_user.username, current_user %>
-  <% end %>
 
   <% if current_user %>
-    |
-  	<%= link_to "Logout", signout_path, :method => 'delete' %>
-    
     <% if current_user.tag_groups.any? %>
     <p> Your tag groups: </p>
     	<% current_user.tag_groups.each do |tag_group| %>
@@ -25,17 +16,6 @@
   <br>
 
   <% if !signed_in? %>
-  <%= form_for(:session, url: sessions_path) do |f| %>
-
-    <%= f.label :email %>
-    <%= f.text_field :email %>
-
-    <%= f.label :password %>
-    <%= f.password_field :password %>
-
-    <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
-   <% end %>
 
    <p>New user? <%= link_to "Sign up bro!", signup_path %></p>
   <% end %>
-</div>
