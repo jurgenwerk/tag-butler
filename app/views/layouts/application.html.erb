@@ -4,13 +4,17 @@
   <title>Tag Butler</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container-fluid">      
-      <div class="nav-collapse">
+      <div class="nav-collapse collapse">
+      	<a href="#" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span clas="icon-th-list"></span>
+                </a>
         <ul class="nav pull-right">
           <li class="active"> 
           	<%= link_to "Tag Butler", root_path %>
