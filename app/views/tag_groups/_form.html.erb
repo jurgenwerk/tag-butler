@@ -1,4 +1,5 @@
-<%= form_for(@tag_group) do |f| %>
+
+<%= form_for(@tag_group, :html => {:class => "group-add-form"}) do |f| %>
   <% if @tag_group.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@tag_group.errors.count, "error") %> prohibited this tag_group from being saved:</h2>
@@ -12,10 +13,9 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, :placeholder => "Name" %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Save', :class => 'btn btn-small btn-block btn-primary'%>
   </div>
 <% end %>

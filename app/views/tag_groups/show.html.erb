@@ -1,38 +1,45 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-   <h1><%= @tag_group.name  %></h2>
-</p><br>
+<div class="row">
+<div class="span4">
+	<%= render :partial => '/tag_groups/sidebar' %>
+</div>
 
-<% if @tag_group.feeds.any? %>
-	<h2>Feeds</h2>
-	<% @tag_group.feeds.each do |feed| %>
-		<%= link_to feed.name, feed %> | <%= link_to 'delete', feed_path(feed, :tag_group => @tag_group.slug), method: :delete %> <br>
-	<% end %>
-<% end %>
+<div id="span7">
+		<% @tag_group = current_user.tag_groups.find(params[:id])  %>
 
-<br> <h4>Add a feed for this group:</h4> 
+		<% if @tag_group.feeds.any? %>
+			<h2>Define your search</h2>
+			<% @tag_group.feeds.each do |feed| %>
+				<%= link_to feed.name, feed %> | <%= link_to 'delete', feed_path(feed, :tag_group => @tag_group.slug), method: :delete %> <br>
+			<% end %>
+		<% end %>
 
-<% @feed = @tag_group.feeds.new() %>
-<%= render :partial => '/feeds/form', :locals => { :tag_group => @tag_group} %>
+		<br> <h4>Add a feed for this group:</h4> 
 
-<% if @tag_group.tags.any? %>
-	<h2>Tags</h2>
-	<% @tag_group.tags.each do |tag| %>
-		<%= link_to tag.value, tag %> | <%= link_to 'delete', tag_path(tag, :tag_group => @tag_group.slug), method: :delete %> <br>
-	<% end %>
-<% end %>
+		<% @feed = @tag_group.feeds.new() %>
+		<%= render :partial => '/feeds/form', :locals => { :tag_group => @tag_group} %>
 
-<br>
-<h4>Add a tag for this group:</h4> 
-<% @tag = @tag_group.tags.new() %>
-<%= render :partial => '/tags/form', :locals => { :tag_group => @tag_group} %>
+		<% if @tag_group.tags.any? %>
+			<h2>Tags</h2>
+			<% @tag_group.tags.each do |tag| %>
+				<%= link_to tag.value, tag %> | <%= link_to 'delete', tag_path(tag, :tag_group => @tag_group.slug), method: :delete %> <br>
+			<% end %>
+		<% end %>
 
-<% if @tag_group.hits.any? %>
-Your hits:<br>
-	<% @tag_group.hits.each do |hit| %>
-		<%= link_to hit.title, hit.url %> <br>
-	<% end%>
-<% else %>
-	No hits yet :(
-<% end %>
+		<br>
+		<h4>What will you be searching for?</h4> 
+		<input name="tagsinput" class="tagsinput tagsinput-primary" value="Clean,Fresh,Modern,Unique" />
+		<% @tag = @tag_group.tags.new() %>
+		<%= render :partial => '/tags/form', :locals => { :tag_group => @tag_group} %>
+
+		<% if @tag_group.hits.any? %>
+		Your hits:<br>
+			<% @tag_group.hits.each do |hit| %>
+				<%= link_to hit.title, hit.url %> <br>
+			<% end%>
+		<% else %>
+			No hits yet :(
+		<% end %>
+</div>
+</div>

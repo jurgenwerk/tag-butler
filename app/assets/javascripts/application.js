@@ -10,7 +10,24 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require jquery
-//= require jquery_ujs
+//= require jquery-1.8.3.min
+//= require jquery-ui-1.10.3.custom.min.js
+//= require jquery.ui.touch-punch.min.js
+//= require bootstrap.min
+//= require bootstrap-select
+//= require bootstrap-switch
+//= require flatui-checkbox
+//= require flatui-radio
+//= require jquery.tagsinput
+//= require jquery.placeholder
+//= require jquery.stacktable
+
 //= require_tree .
 
+$(".group-add").click(function() {
+  
+	$('.group-add').hide(1);
+  $('.group-add-form').slideDown(80);
+	$('.group-add-form').find('#tag_group_name').val('').focus();
+
+});

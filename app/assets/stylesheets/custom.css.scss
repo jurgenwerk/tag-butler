@@ -4,3 +4,33 @@
 	float:right;
 	margin-bottom: 5px;
 }
+
+#group-list {
+	width: 240px;
+}
+
+#tag_group_name {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+	display: block;
+	width: 200px;
+}
+
+.nav-list-vivid > li > a{
+	font-weight: 600 !important;
+}
+
+.group-add {
+	margin-left: 0px;
+	margin-right: 0px;
+	text-align: center;
+}
+
+.group-add-form {
+	display:none;
+}
+
+.tags-not-black-fix {
+	background-color: transparent !important;
+}

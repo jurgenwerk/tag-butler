@@ -5394,7 +5394,7 @@ input.search-query {
 }
 .nav-tabs > li > a {
   border-width: 2px;
-  font-weight: 600;
+  font-weight: 400;
   padding: 7px 21px 8px;
   -webkit-border-radius: 6px 6px 0 0;
   -moz-border-radius: 6px 6px 0 0;
@@ -5405,6 +5405,8 @@ input.search-query {
   -o-transition: none;
   transition: none;
   -webkit-backface-visibility: hidden;
+  font-size: 20px;
+  text-align: right;
 }
 .nav-tabs > li > a:hover,
 .nav-tabs > li > a:focus {

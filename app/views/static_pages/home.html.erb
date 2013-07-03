@@ -1,21 +1,20 @@
-
+<div class="row">
+  <div class = "span3">
   <% if current_user %>
     <% if current_user.tag_groups.any? %>
-    <p> Your tag groups: </p>
-    	<% current_user.tag_groups.each do |tag_group| %>
-    		<%= link_to tag_group.name, tag_group %> |
-    		<%= link_to 'delete', tag_group, method: :delete %> 
-    		<br>
-    	<% end %>
+      <%= render :partial => '/tag_groups/sidebar' %>
     <% end %>
-    <br><br> Make a new tag group:<br><br>
-  <% @tag_group = current_user.tag_groups.new() %>
-  <%= render :partial => '/tag_groups/form' %>
   <% end %>
+  </div>
 
-  <br>
+  <div class = "span5">
 
-  <% if !signed_in? %>
+    pfvšoakqgjrp jerjg iejwrgiojewrgooewgjieg ejwrgioejwrgioj 
 
-   <p>New user? <%= link_to "Sign up bro!", signup_path %></p>
-  <% end %>
+    <% if !signed_in? %>
+
+     <p>New user? <%= link_to "Sign up bro!", signup_path %></p>
+     
+    <% end %>
+  </div>
+</div>

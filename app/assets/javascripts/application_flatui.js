@@ -167,5 +167,6 @@ String.prototype.repeat = function(num) {
 
     // Stackable tables
     $(".table-striped").stacktable({id: "rwd-table"});
+
   });
 })(jQuery);
